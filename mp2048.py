@@ -4,6 +4,7 @@ from multiprocessing import Queue, Manager, log_to_stderr
 from packing import human2bin
 import csv
 import logging
+import sys
 
 
 if __name__ == "__main__":
@@ -19,5 +20,9 @@ if __name__ == "__main__":
     games = 8
     h = Hoard(queue, games, 2)
     d = Dashboard(queue, games)
-    h.run("800000082800000:400000020004000:", pre, logger)
+    if len(sys.argv) > 1:
+        start = sys.argv[1]
+    else:
+        start = "1011::"
+    h.run(start, pre, logger)
     d.run(queue)

@@ -27,28 +27,33 @@ function initBoards(amt) {
         cont.className = "cont";
         var title = document.createElement('h3');
         title.id = "title" + i.toString();
+        var sub = document.createElement('h4');
+        sub.id = "sub" + i.toString();
+        sub.className = "sub";
         var canvas = document.createElement('canvas');
         canvas.width = dim * 4;
         canvas.height = dim * 4;
         canvas.id = "board" + i.toString();
         cont.appendChild(title);
+        cont.appendChild(sub);
         cont.appendChild(canvas);
         document.body.appendChild(cont);
     }
 }
 
 eel.expose(update);
-function update(boardId, moveI, boardMat) {
+function update(boardId, moveI, boardMat, sub) {
     console.log(JSON.parse(boardMat));
     boardMat = JSON.parse(boardMat);
     boards[boardId] = boardMat;
     moves[boardId] = moveI
-    setTitle(boardId, "Board #" + (boardId + 1).toString() + " - Move #" + moves[0].toString());
+    setTitle(boardId, "Board #" + (boardId + 1).toString() + " - Move #" + moves[0].toString(), sub);
     drawBoard(boardId);
 }
 
-function setTitle(boardId, title) {
+function setTitle(boardId, title, sub) {
     document.getElementById("title" + boardId.toString()).innerText = title;
+    document.getElementById("sub" + boardId.toString()).innerText = sub;
 }
 
 function drawBoard(boardId, boardMat) {

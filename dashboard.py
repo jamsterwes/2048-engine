@@ -15,7 +15,7 @@ class Dashboard:
         eel.start('sboard.html', block=True)
 
     def update(self, data):
-        eel.update(data[0], data[1], data[2])
+        eel.update(*data)
 
     def onload(self, queue):
         while True:
